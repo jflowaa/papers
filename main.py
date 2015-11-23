@@ -1,5 +1,5 @@
-from packs import Reddit
-from packs import ImgHandler
+from packages import Reddit
+from packages import ImgHandler
 import time
 import configparser
 
@@ -27,7 +27,7 @@ def main():
             imghandler.restructure()
             print("Files restructured.")
         print("Going to sleep for: {} minutes.".format(sleep_time))
-        time.sleep(int(sleep_time)*60*60)
+        time.sleep(int(sleep_time)*60)
         print("Waking up...")
 
 if __name__ == "__main__":
