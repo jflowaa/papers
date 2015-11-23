@@ -2,6 +2,7 @@
 ## Gets new pictures on subreddits.
 
 This program was built under Python 3 and Linux.
+
 Has not been ran on Windows.
 
 #### How To:
@@ -16,7 +17,7 @@ To change settings modify the `config.ini`.
 
 Currently log does nothing. Most of the testing for this has only been done with unit tests. These are found in `tests.py`.
 
-This hasn't not gone through a lot of testing. Run in this isolated folders. 
+This hasn't not gone through a lot of testing. Run this in isolated folders. 
 
 #### To Do:
 
