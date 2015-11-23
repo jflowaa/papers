@@ -1,0 +1,6 @@
+Pillow==3.0.0
+decorator==4.0.4
+praw==3.3.0
+requests==2.8.1
+six==1.10.0
+update-checker==0.11
