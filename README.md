@@ -10,7 +10,7 @@ requirements, it is downloaded. Downloaded images are stored in a temp folder. A
 images are renamed with its resolution and a number then moved to a different folder. Program then goes to sleep for a
 certain for a certain time. Repeats process when waken. 
 
-This also cycles through the images downloaded as wallpapers. Currently only supports two monitors and the GNOME desktop enviroment. 
+This also cycles through the images downloaded as wallpapers. Currently only supports two monitors and the GNOME, Unity, and Cinnamon desktop enviroment. 
 
 #### How To:
 
