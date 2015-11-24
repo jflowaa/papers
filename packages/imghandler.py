@@ -35,7 +35,10 @@ class ImgHandler:
 
     def download_image(self, link):
         """ Downloads the image from imgur using requests """
-        response = requests.get(link)
+        try:
+            response = requests.get(link)
+        except ConnectionError:
+            return
         if response.status_code == 200:
             with open("{}/picture_{}".format(self.temp_dir, self.get_number()), 'wb') as picture:
                 for chunk in response.iter_content(4096):
