@@ -12,7 +12,6 @@ class WallHandler:
         self.config = configparser.ConfigParser()
         self.config.read('config.ini')
         self.picture_dir = self.config.get('FILEMANAGER', 'FinalLocation')
-        self.display_dir = self.config.get('FILEMANAGER', 'DisplayLocation')
         self.width = self.config.get('SETTINGS', 'MonitorWidth')
         self.height = self.config.get('SETTINGS', 'MonitorHeight')
         self.monitors = self.config.get('SETTINGS', 'NumberMonitors')
@@ -29,9 +28,11 @@ class WallHandler:
 
     def get_image(self):
         """ Chooses a random file from the picture_dir, returns it to be merged """
-        image = None
-        while(not image or os.path.isfile(image)):
+        image = random.choice(os.listdir(self.picture_dir))
+        head, tail = os.path.split(image)
+        while(tail == "paper.jpg"):
             image = random.choice(os.listdir(self.picture_dir))
+            head, tail = os.path.split(image)
         return "/" + image
 
     def merge_images(self):
@@ -45,7 +46,7 @@ class WallHandler:
                 new_image.paste(image1, (0, 0))
                 new_image.paste(image2, (int(self.width), 0))
         new_image.save("paper.jpg")
-        shutil.move("paper.jpg", self.display_dir + "/paper.jpg")
+        shutil.move("paper.jpg", self.picture_dir + "/paper.jpg")
 
     def set_wallpaper(self, image=None):
         """ Checks were DE is running. Sets the wallpaper for that DE """
@@ -62,7 +63,7 @@ class WallHandler:
 
     def command_call(self, de, image=None):
         if image:
-            os.system("gsettings set org.{}.desktop.background picture-uri file://{}/{}".format(de, self.display_dir, image))
+            os.system("gsettings set org.{}.desktop.background picture-uri file://{}/{}".format(de, self.picture_dir, image))
         else:
-            os.system("gsettings set org.{}.desktop.background picture-uri file://{}/paper.jpg".format(de, self.display_dir))
+            os.system("gsettings set org.{}.desktop.background picture-uri file://{}/paper.jpg".format(de, self.picture_dir))
 

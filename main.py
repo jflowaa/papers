@@ -43,7 +43,7 @@ def cycle_wallpaper():
     while(True):
         print("Changing wallpaper. Next change in {} minutes".format(cycle_time))
         wallhandler.run()
-        time.sleep(int(cycle_time) * 60)
+        time.sleep(int(cycle_time))
 
 
 def main():
