@@ -10,14 +10,14 @@ class Reddit:
         self.cursor = praw.Reddit(user_agent="Papers")
         self.config = configparser.ConfigParser()
         self.config.read("config.ini")
-        self.subreddits = self.config.get('SETTINGS', 'Subreddits').split(',')
+        self.subreddits = self.config.get('REDDIT', 'Subreddits').split(',')
         try:
             with open("post_ids.txt", "r") as reader:
                 self.post_ids = [line.strip('\n') for line in reader]
         except FileNotFoundError:
             self.post_ids = []
-        self.MinRes = self.config.get('SETTINGS', 'MinRes')
-        self.post_limt = self.config.get('SETTINGS', 'PostsPerSubLimit')
+        self.MinRes = self.config.get('REDDIT', 'MinRes')
+        self.post_limt = self.config.get('REDDIT', 'PostsPerSubLimit')
         self.ids_change = False
         self.download_list = []
 

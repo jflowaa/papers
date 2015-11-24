@@ -1,16 +1,21 @@
 from packages import Reddit
 from packages import ImgHandler
+from packages import WallHandler
 import time
 import configparser
+import os
+import threading
+
+reddit = Reddit()
+imghandler = ImgHandler()
+wallhandler = WallHandler()
+config = configparser.ConfigParser()
+config.read('config.ini')
+sleep_time = config.get('SETTINGS', 'SleepTime')
+cycle_time = config.get('SETTINGS', 'WallpaperCycleTime')
 
 
-def main():
-    reddit = Reddit()
-    imghandler = ImgHandler()
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    sleep_time = config.get('SETTINGS', 'SleepTime')
-    print("Starting")
+def fetch_images():
     while(True):
         print("Fetching for new images on set subreddits.")
         reddit.run()
@@ -27,8 +32,31 @@ def main():
             imghandler.restructure()
             print("Files restructured.")
         print("Going to sleep for: {} minutes.".format(sleep_time))
-        time.sleep(int(sleep_time)*60)
+        time.sleep(int(sleep_time) * 60)
         print("Waking up...")
+
+
+def cycle_wallpaper():
+    while(True):
+        print("Changing wallpaper")
+        wallhandler.run()
+        time.sleep(int(cycle_time) * 60)
+
+
+def main():
+    print("Starting")
+    fetch = threading.Thread(target=fetch_images)
+    fetch.start()
+    picture_dir = config.get('FILEMANAGER', 'FinalLocation')
+    while(os.listdir(picture_dir) == []):
+        print("You currently have no wallpapers, please wait while some get fetched")
+        time.sleep(30)
+        if os.listdir(picture_dir) != []:
+            imghandler.restructure()
+            break
+    cycle = threading.Thread(target=cycle_wallpaper)
+    cycle.start()
+
 
 if __name__ == "__main__":
     main()

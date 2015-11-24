@@ -4,6 +4,7 @@ import praw
 import requests
 import os
 import re
+from PIL import Image, ImageChops
 
 
 class TestConfig(unittest.TestCase):
@@ -12,9 +13,9 @@ class TestConfig(unittest.TestCase):
         """ Tests by openning the config. Getting the sections in the
             config. Comparing sections to the known sections. """
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read('../config.ini')
         config_sections = config.sections()
-        correct_sections = ("FILEMANAGER", "SETTINGS")
+        correct_sections = ("FILEMANAGER", "SETTINGS", "REDDIT")
         self.assertEqual(set(config_sections), set(correct_sections))
 
 
@@ -82,6 +83,21 @@ class TestImageHandling(unittest.TestCase):
         self.assertTrue(os.path.isfile("picture"))
         os.remove("picture")
 
+    def test_merge_images(self):
+        """ Merges two images to be used for dual monitors """
+        test_image = Image.new('RGB', (3840, 1080))
+        with open("pic1.jpg", 'rb') as pic1:
+            with open("pic2.jpg", 'rb') as pic2:
+                image1 = Image.open(pic1)
+                image2 = Image.open(pic2)
+                test_image.paste(image1, (0, 0))
+                test_image.paste(image2, (1921, 0))
+        test_image.save("test.jpg")
+        with open("correct.jpg", 'rb') as image1:
+            with open("test.jpg", 'rb') as image2:
+                correct_image = Image.open(image1)
+                test_image = Image.open(image2)
+                self.assertTrue(ImageChops.difference(test_image, correct_image).getbbox() is None)
 
 if __name__ == '__main__':
     unittest.main()

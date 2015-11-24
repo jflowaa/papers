@@ -13,6 +13,7 @@ class ImgHandler:
         self.config.read('config.ini')
         self.temp_dir = self.config.get('FILEMANAGER', 'TempLocation')
         self.final_dir = self.config.get('FILEMANAGER', 'FinalLocation')
+        self.display_dir = self.config.get('FILEMANAGER', 'DisplayLocation')
         self.check_dirs()
         self.number_pool = [number for number in range(0, 10000)]
 
@@ -23,6 +24,8 @@ class ImgHandler:
             os.makedirs(self.temp_dir)
         if not os.path.exists(self.final_dir):
             os.makedirs(self.final_dir)
+        if not os.path.exists(self.display_dir):
+            os.makedirs(self.display_dir)
 
     def get_number(self):
         """ Gets a random number out of a 10000"""
