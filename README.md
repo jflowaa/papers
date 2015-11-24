@@ -10,6 +10,8 @@ requirements, it is downloaded. Downloaded images are stored in a temp folder. A
 images are renamed with its resolution and a number then moved to a different folder. Program then goes to sleep for a
 certain for a certain time. Repeats process when waken. 
 
+This also cycles through the images downloaded as wallpapers. Currently only supports two monitors and the GNOME desktop enviroment. 
+
 #### How To:
 
 To install the required packages:
@@ -19,6 +21,8 @@ To run the program:
 > python main.py
 
 To change settings modify the `config.ini`.
+
+*NOTE* You must set your backgroun alignment option to "spanned" or something simliar for the image to span amoung the monitors. 
 
 Currently log does nothing. Most of the testing for this has only been done with unit tests. These are found in `tests.py`.
 
@@ -30,6 +34,6 @@ This hasn't not gone through a lot of testing. Run this in isolated folders.
 - Organize/clean code better.
 - I don't like how handling image resolution is handled. This includes the degrading.
 - More settings
-- Implement changing wallpaper. This will probably be for GNOME only
+- Implement changing wallpaper for other DEs
 - Dual monitor support for wallpaper changing. May require merging images into one.
 - Image extentions are dropped. Windows probably won't like that. Need to get them back.
