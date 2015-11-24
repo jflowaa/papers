@@ -45,4 +45,4 @@ class WallHandler:
         if image:
             os.system("gsettings set org.gnome.desktop.background picture-uri file://{}/{}".format(self.display_dir, image))
         else:
-            os.system("gsettings set org.gnome.desktop.background picture-uri {}/paper.jpg".format(self.display_dir))
+            os.system("gsettings set org.gnome.desktop.background picture-uri file://{}/paper.jpg".format(self.display_dir))
