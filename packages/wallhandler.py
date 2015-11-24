@@ -37,7 +37,7 @@ class WallHandler:
                 image1 = Image.open(file1)
                 image2 = Image.open(file2)
                 new_image.paste(image1, (0, 0))
-                new_image.paste(image2, (int(self.width) + 1, 0))
+                new_image.paste(image2, (int(self.width), 0))
         new_image.save("paper.jpg")
         shutil.move("paper.jpg", self.display_dir + "/paper.jpg")
 
