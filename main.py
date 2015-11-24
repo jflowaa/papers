@@ -16,6 +16,7 @@ cycle_time = config.get('SETTINGS', 'WallpaperCycleTime')
 
 
 def fetch_images():
+    """ Runs in a seperate thread. Fetches images every set amount of time"""
     while(True):
         print("Fetching for new images on set subreddits.")
         reddit.run()
@@ -31,14 +32,16 @@ def fetch_images():
             print("All found images downloaded. Restructuring files...")
             imghandler.restructure()
             print("Files restructured.")
-        print("Going to sleep for: {} minutes.".format(sleep_time))
+        print("Going to sleep for {} minutes.".format(sleep_time))
+        reddit.download_list = []
         time.sleep(int(sleep_time) * 60)
         print("Waking up...")
 
 
 def cycle_wallpaper():
+    """ Runs in a seperate thread. Changes wallpaper every set amount of time"""
     while(True):
-        print("Changing wallpaper")
+        print("Changing wallpaper. Next change in {} minutes".format(cycle_time))
         wallhandler.run()
         time.sleep(int(cycle_time) * 60)
 
@@ -48,7 +51,7 @@ def main():
     fetch = threading.Thread(target=fetch_images)
     fetch.start()
     picture_dir = config.get('FILEMANAGER', 'FinalLocation')
-    while(os.listdir(picture_dir) == []):
+    while(len(os.listdir(picture_dir)) < 3):
         print("You currently have no wallpapers, please wait while some get fetched")
         time.sleep(30)
         if os.listdir(picture_dir) != []:
