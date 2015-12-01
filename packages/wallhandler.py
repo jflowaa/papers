@@ -36,15 +36,12 @@ class WallHandler:
         return "/" + image
 
     def merge_images(self):
-        """ Takes two images and merges them together side-to-side
-            This is for dual monitors. """
+        """ Takes self.monitors images and merges them together side-to-side """
         new_image = Image.new('RGB', (self.resolution))
-        with open(self.picture_dir + self.get_image(), 'rb') as file1:
-            with open(self.picture_dir + self.get_image(), 'rb') as file2:
-                image1 = Image.open(file1)
-                image2 = Image.open(file2)
-                new_image.paste(image1, (0, 0))
-                new_image.paste(image2, (int(self.width), 0))
+        for i in range(int(self.monitors)):
+            with open(self.picture_dir + self.get_image(), 'rb') as picture:
+                image = Image.open(picture)
+                new_image.paste(image, (int(self.width) * i, 0))
         new_image.save("paper.jpg")
         shutil.move("paper.jpg", self.picture_dir + "/paper.jpg")
 

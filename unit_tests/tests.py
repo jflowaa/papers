@@ -84,14 +84,13 @@ class TestImageHandling(unittest.TestCase):
         os.remove("picture")
 
     def test_merge_images(self):
-        """ Merges two images to be used for dual monitors """
-        test_image = Image.new('RGB', (3840, 1080))
-        with open("pic1.jpg", 'rb') as pic1:
-            with open("pic2.jpg", 'rb') as pic2:
-                image1 = Image.open(pic1)
-                image2 = Image.open(pic2)
-                test_image.paste(image1, (0, 0))
-                test_image.paste(image2, (1920, 0))
+        """ Merges x number of images for x number of monitors. With width of 1920 pixels. """
+        x = 3
+        test_image = Image.new('RGB', (1920 * x, 1080))
+        for i in range(x):
+            with open("pic{}.jpg".format(i), 'rb') as picture:
+                image = Image.open(picture)
+                test_image.paste(image, (1920 * i, 0))
         test_image.save("test.jpg")
         with open("correct.jpg", 'rb') as image1:
             with open("test.jpg", 'rb') as image2:
