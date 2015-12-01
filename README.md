@@ -1,5 +1,4 @@
 # Papers
-## Gets new pictures on subreddits.
 
 This program was built under Python 3 and Linux.
 
@@ -22,7 +21,7 @@ To run the program:
 
 To change settings modify the `config.ini`.
 
-*NOTE* You must set your backgroun alignment option to "spanned" or something simliar for the image to span amoung the monitors. 
+*NOTE* You must set your background alignment option to "spanned" or something simliar for the image to span amoung the monitors. 
 
 Currently log does nothing. Most of the testing for this has only been done with unit tests. These are found in `tests.py`.
 
@@ -30,10 +29,7 @@ This hasn't not gone through a lot of testing. Run this in isolated folders.
 
 #### To Do:
 
-- Plan to add a GUI.
-- Organize/clean code better.
-- I don't like how handling image resolution is handled. This includes the degrading.
+- Plan to add a full GUI.
 - More settings
 - Implement changing wallpaper for other DEs
-- Dual monitor support for wallpaper changing. May require merging images into one.
-- Image extentions are dropped. Windows probably won't like that. Need to get them back.
+- Image extentions are dropped. Windows probably won't like that. 
