@@ -91,7 +91,7 @@ class TestImageHandling(unittest.TestCase):
                 image1 = Image.open(pic1)
                 image2 = Image.open(pic2)
                 test_image.paste(image1, (0, 0))
-                test_image.paste(image2, (1921, 0))
+                test_image.paste(image2, (1920, 0))
         test_image.save("test.jpg")
         with open("correct.jpg", 'rb') as image1:
             with open("test.jpg", 'rb') as image2:

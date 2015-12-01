@@ -1,5 +1,7 @@
 from tkinter import Tk, RAISED
 from tkinter.ttk import Frame, Button, Label, Style
+from packages import WallHandler
+from packages import Reddit
 
 
 class MainWindow(Frame):
@@ -8,6 +10,8 @@ class MainWindow(Frame):
         self.parent = parent
         self.grid()
         self.init_ui()
+        self.wallhandler = WallHandler()
+        self.reddit = Reddit()
 
     def init_ui(self):
         self.parent.title("Papers")
@@ -15,18 +19,20 @@ class MainWindow(Frame):
         self.style.theme_use("clam")
         frame = Frame(self, relief=RAISED, borderwidth=1)
         frame.grid(row=0, column=0)
-        label = Label(frame, text="Get Images")
+        label = Label(frame, text="Change Wallpaper")
         label.grid(row=0, column=0)
-        button = Button(frame, text="Start", command=self.start)
+        button = Button(frame, text="Change", command=self.change)
         button.grid(row=1, column=0)
-        button = Button(frame, text="Stop", command=self.stop)
-        button.grid(row=1, column=1)
+        label = Label(frame, text="Fetch Wallpapers")
+        label.grid(row=2, column=0)
+        button = Button(frame, text="Fetch", command=self.fetch)
+        button.grid(row=3, column=0)
 
-    def start(self):
-        print("Starting")
+    def change(self):
+        self.wallhandler.run()
 
-    def stop(self):
-        print("I can't stop.")
+    def fetch(self):
+        self.reddit.run()
 
 
 def main():
