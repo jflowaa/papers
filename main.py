@@ -24,7 +24,7 @@ def fetch_images():
         if len(reddit.download_list) == 0:
             print("No new imgur links found.")
         else:
-            print("List of imgur links acquired. Downloading images.")
+            print("List of imgur links acquired ({}). Downloading images.".format(len(reddit.download_list)))
             print("This could take awhile...")
             for link in reddit.download_list:
                 imghandler.download_image(link)
