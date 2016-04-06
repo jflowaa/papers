@@ -1,13 +1,9 @@
 # Papers
 
-This program was built under Python 3 and Linux.
-
-Has not been tested on Windows.
-
 Fetches posts from subreddits for imgur links. Parses the post title for resolution infomation. If the resolution meets
 requirements, it is downloaded. Downloaded images are stored in a temp folder. After all downloading is done, the new
 images are renamed with its resolution and a number then moved to a different folder. Program then goes to sleep for a
-certain for a certain time. Repeats process when waken. 
+certain for a certain time. Repeats process when it wakes. 
 
 This also cycles through the images downloaded as wallpapers. Currently only supports the GNOME, Unity, and Cinnamon desktop enviroment. 
 
